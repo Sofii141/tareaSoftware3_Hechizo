@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grimorio de Hechizos</title>
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Tu Hoja de Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <section class="full-page-section">
+        <h1 class="main-title">
+            Grimorio de Hechizos
+        </h1>
+        <div class="container hidden">
+            <div class="input-group">
+                <input type="text" id="nuevo-hechizo" placeholder="Escribe un nuevo hechizo...">
+                <button id="btn-agregar">Agregar Hechizo</button>
+            </div>
+            <ul id="lista-hechizos"></ul>
+            <div class="contador">
+                <p>Hechizos en el grimorio: <span id="contador">0</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="full-page-section" id="seccion-pacto">
+        <div class="contenedor-formulario hidden">
+            <h1>PACTO INFERNAL</h1>
+            <p class="subtitle">Complete sus datos para proceder con la transacción de su alma</p>
+            <form id="infernal-form" onsubmit="return false;">
+            <div class="form-content">
+
+            <!-- Grupo de Nombre y Apellido -->
+            <div class="form-field-group">
+                <!-- Fila solo para las etiquetas -->
+                <div class="form-row label-row">
+                    <label for="nombre">Nombre <span class="required">*</span></label>
+                    <label for="apellido">Apellido <span class="required">*</span></label>
+                </div>
+                <!-- Fila solo para los campos de texto -->
+                <div class="form-row">
+                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+            </div>
+
+            <!-- Grupo de Número de Tarjeta (ocupa toda la línea) -->
+            <div class="form-field-group">
+                <!-- Fila para la etiqueta -->
+                <div class="form-row label-row">
+                    <label for="tarjeta">Número de Tarjeta <span class="required">*</span></label>
+                </div>
+                <!-- Fila para el campo de texto -->
+                <div class="form-row">
+                    <input type="text" id="tarjeta" name="tarjeta" required placeholder="0000-0000-0000-0000">
+                </div>
+            </div>
+
+            <!-- Grupo de Vencimiento y CVV -->
+            <div class="form-field-group">
+                <!-- Fila para las etiquetas -->
+                <div class="form-row label-row">
+                    <label for="vencimiento">Vencimiento (MM/AA) <span class="required">*</span></label>
+                    <label for="cvv">CVV <span class="required">*</span></label>
+                </div>
+                <!-- Fila para los campos de texto -->
+                <div class="form-row">
+                    <input type="text" id="vencimiento" name="vencimiento" required placeholder="MM/AA">
+                    <input type="text" id="cvv" name="cvv" required placeholder="123">
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="checkalma" name="alma" required value="si">
+                <label for="alma" class="checkbox-label">¿Acepta que su alma sea consumida? <span class="required">*</span></label>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="enviar-alma">FIRMAR PACTO</button>
+        </div>
+    </form>
+            <p class="footer">Al firmar, acepta perder todos los derechos sobre su alma.</p>
+        </div>
+    </section>
+
+    <section class="full-page-section" id="seccion-tabla">
+        <div class="contenedor-tabla hidden">
+            <h1>Conozca el destino de su Alma</h1>
+            <table id="lista-infernal">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Tarjeta</th>
+                        <th>Alma consumida en:</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

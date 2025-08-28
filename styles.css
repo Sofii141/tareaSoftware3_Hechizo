@@ -1,0 +1,368 @@
+/* --------------------
+   1. VARIABLES Y FUENTES
+   -------------------- */
+:root {
+    --color-fondo-oscuro: #0d0c1d;
+    --color-fondo-secundario: #1b172e;
+    --color-primario: #9333ea;
+    --color-secundario: #d946ef;
+    --color-texto-principal: #e2e8f0;
+    --color-texto-secundario: #94a3b8;
+    --color-peligro: #f43f5e;
+    --color-exito: #34d399;
+    --fuente-titulos: 'Cinzel Decorative', cursive;
+    --fuente-cuerpo: 'Merriweather', serif;
+}
+
+/* --------------------
+   2. ESTILOS GLOBALES Y DE PÁGINA
+   -------------------- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-texto-principal);
+    background-image: url('https://www.transparenttextures.com/patterns/arches.png'), 
+                      radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.25), transparent 70%);
+    background-color: var(--color-fondo-oscuro);
+    background-attachment: fixed; 
+    background-position: center;
+    background-size: auto, cover;
+}
+
+/* --------------------
+   3. LAYOUT PRINCIPAL Y ANIMACIONES
+   -------------------- */
+.full-page-section {
+    min-height: 100vh; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+    box-sizing: border-box;
+    background-color: rgba(13, 12, 29, 0.5);
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --------------------
+   4. COMPONENTES GENERALES (Títulos y Contenedores)
+   -------------------- */
+h1 {
+    font-family: var(--fuente-titulos);
+    text-align: center;
+    color: var(--color-primario);
+    text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+h1.main-title {
+    font-size: 4rem;
+    letter-spacing: 3px;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, var(--color-secundario), var(--color-primario));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(217, 70, 239, 0.5), 0 0 25px rgba(147, 51, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-title .title-icon {
+    height: 0.9em;
+    margin-right: 1rem;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+}
+
+.container, 
+.contenedor-formulario, 
+.contenedor-tabla {
+    width: 100%;
+    max-width: 800px;
+    min-height: 400px;
+    background: rgba(27, 23, 46, 0.7);
+    border-radius: 12px;
+    padding: 2.5rem;
+    backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(27, 23, 46, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; 
+}
+
+.container::before, 
+.contenedor-formulario::before, 
+.contenedor-tabla::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    z-index: -1;
+}
+
+/* --------------------
+   5. ESTILOS DE LA SECCIÓN GRIMORIO
+   -------------------- */
+.input-group {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+#nuevo-hechizo {
+    flex-grow: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--color-primario);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    background: var(--color-fondo-oscuro);
+    color: var(--color-texto-principal);
+    font-family: var(--fuente-cuerpo);
+    font-size: 1rem;
+}
+
+#btn-agregar {
+    padding: 0.8rem 1.5rem;
+    background: var(--color-primario);
+    color: white;
+    border: 2px solid var(--color-primario);
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#btn-agregar:hover {
+    background: var(--color-secundario);
+    border-color: var(--color-secundario);
+    transform: scale(1.05);
+}
+
+#lista-hechizos {
+    list-style: none;
+    padding: 0;
+    margin-right: -10px;
+    padding-right: 10px;
+    flex-grow: 1;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+.hechizo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(147, 51, 234, 0.1);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--color-primario);
+    transition: transform 0.2s ease;
+}
+
+.hechizo:hover {
+    transform: translateX(10px);
+}
+
+.hechizo.aprendido {
+    opacity: 0.6;
+    border-left-color: var(--color-exito);
+    text-decoration: line-through;
+}
+
+.hechizo .acciones {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-accion {
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.btn-accion:hover {
+    opacity: 0.8;
+}
+
+.aprender { 
+    background: var(--color-exito); 
+}
+
+.eliminar { 
+    background: var(--color-peligro); 
+}
+
+.contador { 
+    text-align: center; 
+    margin-top: 1.5rem; 
+    font-size: 1.1rem; 
+}
+
+/* --------------------
+   6. ESTILOS DE LA SECCIÓN FORMULARIO
+   -------------------- */
+.subtitle { 
+    text-align: center; 
+    margin-bottom: 1.5rem; 
+}
+
+.form-content {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.form-field-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.label-row {
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.label-row label {
+    flex: 1;
+    padding-bottom: 0.2rem;
+    color: var(--color-texto-secundario);
+}
+
+#infernal-form input[type="text"] {
+    width: 100%;
+    padding: 0.8rem; 
+    background: var(--color-fondo-oscuro); 
+    border: 1px solid var(--color-primario); 
+    border-radius: 6px; 
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    font-family: var(--fuente-cuerpo);
+}
+
+.checkbox-group { 
+    display: flex; 
+    align-items: center; 
+    margin: 2rem 0; 
+}
+
+.checkbox-group input[type="checkbox"] { 
+    margin-right: 10px; 
+    transform: scale(1.2);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-family: var(--fuente-titulos);
+    border-radius: 6px;
+    border: none;
+    background-color: var(--color-peligro);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+}
+
+.footer { 
+    text-align: center; 
+    margin-top: 1.5rem; 
+    font-size: 0.8rem; 
+}
+
+/* --------------------
+   7. ESTILOS DE LA SECCIÓN TABLA
+   -------------------- */
+.contenedor-tabla {
+    max-width: 900px;
+    height: 70vh;
+}
+
+#lista-infernal {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#lista-infernal thead {
+    color: var(--color-secundario);
+    background-color: rgba(13, 12, 29, 0.8);
+}
+
+#lista-infernal th, 
+#lista-infernal td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(147, 51, 234, 0.2);
+}
+
+#lista-infernal tbody {
+    display: block;
+    max-height: 45vh;
+    overflow-y: auto;
+}
+
+#lista-infernal thead, 
+#lista-infernal tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* --------------------
+   8. ESTILOS DEL SCROLLBAR
+   -------------------- */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-fondo-secundario);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-primario), var(--color-secundario));
+    border-radius: 10px;
+    border: 2px solid var(--color-fondo-secundario);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secundario);
+}
