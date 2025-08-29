@@ -26,17 +26,21 @@ body {
     padding: 0;
     font-family: var(--fuente-cuerpo);
     color: var(--color-texto-principal);
-    background-image: url('https://www.transparenttextures.com/patterns/arches.png'), 
-                      radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.25), transparent 70%);
     background-color: var(--color-fondo-oscuro);
-    background-attachment: fixed; 
-    background-position: center;
-    background-size: auto, cover;
 }
 
 /* --------------------
-   3. LAYOUT PRINCIPAL Y ANIMACIONES
+   3. LAYOUT, PARTÍCULAS Y ANIMACIONES
    -------------------- */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
 .full-page-section {
     min-height: 100vh; 
     width: 100%;
@@ -46,7 +50,8 @@ body {
     align-items: center;
     padding: 3rem 1rem;
     box-sizing: border-box;
-    background-color: rgba(13, 12, 29, 0.5);
+    position: relative;
+    z-index: 1;
 }
 
 .hidden {
@@ -92,8 +97,9 @@ h1.main-title {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
 }
 
+/* Estilo para los contenedores que necesitan un tamaño fijo (Grimorio y Tabla) */
+
 .container, 
-.contenedor-formulario, 
 .contenedor-tabla {
     width: 100%;
     max-width: 800px;
@@ -110,12 +116,34 @@ h1.main-title {
     align-items: stretch; 
 }
 
+.contenedor-formulario {
+    width: 100%;
+    max-width: 800px;
+    min-height: 645px;
+    background: rgba(27, 23, 46, 0.7);
+    border-radius: 12px;
+    padding: 2.5rem;
+    backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(27, 23, 46, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: min-height 0.3s ease-in-out; /* Transición suave si la altura cambia */
+}
+
+/* Borde para todos los contenedores */
+
 .container::before, 
 .contenedor-formulario::before, 
 .contenedor-tabla::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 12px;
     padding: 2px;
     background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
@@ -270,6 +298,13 @@ h1.main-title {
     color: var(--color-texto-principal);
     font-size: 1rem;
     font-family: var(--fuente-cuerpo);
+    transition: all 0.3s ease-in-out;
+}
+
+#infernal-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-secundario);
+    box-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
 }
 
 .checkbox-group { 
@@ -293,7 +328,7 @@ h1.main-title {
     background-color: var(--color-peligro);
     color: white;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
@@ -308,7 +343,59 @@ h1.main-title {
 }
 
 /* --------------------
-   7. ESTILOS DE LA SECCIÓN TABLA
+   7. ESTILOS DEL RITUAL DE SELLADO
+   -------------------- */
+.ritual-hidden {
+    display: none !important; /* important para asegurar que se oculte */
+}
+
+#ritual-container, 
+#success-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+}
+
+#pentagram-svg {
+    width: 150px;
+}
+
+#pentagram-svg path {
+    fill: none;
+    stroke: var(--color-secundario);
+    stroke-width: 2;
+    stroke-dasharray: 250;
+    stroke-dashoffset: 250;
+}
+
+.animate-draw #pentagram-svg path {
+    animation: draw-pentagram 2s ease-in-out forwards;
+}
+
+@keyframes draw-pentagram {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.ritual-text {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    letter-spacing: 1px;
+}
+
+.success-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+/* --------------------
+   8. ESTILOS DE LA SECCIÓN TABLA
    -------------------- */
 .contenedor-tabla {
     max-width: 900px;
@@ -346,7 +433,7 @@ h1.main-title {
 }
 
 /* --------------------
-   8. ESTILOS DEL SCROLLBAR
+   9. ESTILOS DEL SCROLLBAR
    -------------------- */
 ::-webkit-scrollbar {
     width: 12px;
