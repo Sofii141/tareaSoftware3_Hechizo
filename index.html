@@ -10,11 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
     
-    <!-- Tu Hoja de Estilos -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
+    <!-- Contenedor para las partículas mágicas -->
+    <div id="particles-js"></div>
 
     <section class="full-page-section">
         <h1 class="main-title">
@@ -34,60 +36,45 @@
 
     <section class="full-page-section" id="seccion-pacto">
         <div class="contenedor-formulario hidden">
-            <h1>PACTO INFERNAL</h1>
-            <p class="subtitle">Complete sus datos para proceder con la transacción de su alma</p>
-            <form id="infernal-form" onsubmit="return false;">
-            <div class="form-content">
-
-            <!-- Grupo de Nombre y Apellido -->
-            <div class="form-field-group">
-                <!-- Fila solo para las etiquetas -->
-                <div class="form-row label-row">
-                    <label for="nombre">Nombre <span class="required">*</span></label>
-                    <label for="apellido">Apellido <span class="required">*</span></label>
-                </div>
-                <!-- Fila solo para los campos de texto -->
-                <div class="form-row">
-                    <input type="text" id="nombre" name="nombre" required>
-                    <input type="text" id="apellido" name="apellido" required>
-                </div>
-            </div>
-
-            <!-- Grupo de Número de Tarjeta (ocupa toda la línea) -->
-            <div class="form-field-group">
-                <!-- Fila para la etiqueta -->
-                <div class="form-row label-row">
-                    <label for="tarjeta">Número de Tarjeta <span class="required">*</span></label>
-                </div>
-                <!-- Fila para el campo de texto -->
-                <div class="form-row">
-                    <input type="text" id="tarjeta" name="tarjeta" required placeholder="0000-0000-0000-0000">
-                </div>
-            </div>
-
-            <!-- Grupo de Vencimiento y CVV -->
-            <div class="form-field-group">
-                <!-- Fila para las etiquetas -->
-                <div class="form-row label-row">
-                    <label for="vencimiento">Vencimiento (MM/AA) <span class="required">*</span></label>
-                    <label for="cvv">CVV <span class="required">*</span></label>
-                </div>
-                <!-- Fila para los campos de texto -->
-                <div class="form-row">
-                    <input type="text" id="vencimiento" name="vencimiento" required placeholder="MM/AA">
-                    <input type="text" id="cvv" name="cvv" required placeholder="123">
-                </div>
-            </div>
             
-            <div class="checkbox-group">
-                <input type="checkbox" id="checkalma" name="alma" required value="si">
-                <label for="alma" class="checkbox-label">¿Acepta que su alma sea consumida? <span class="required">*</span></label>
+            <div id="form-wrapper">
+                <h1>PACTO INFERNAL</h1>
+                <p class="subtitle">Complete sus datos para proceder con la transacción de su alma</p>
+                <form id="infernal-form" onsubmit="return false;">
+                    <div class="form-content">
+                        
+                        <div class="form-field-group">
+                            <div class="form-row label-row"><label for="nombre">Nombre <span class="required">*</span></label><label for="apellido">Apellido <span class="required">*</span></label></div>
+                            <div class="form-row"><input type="text" id="nombre" name="nombre" required><input type="text" id="apellido" name="apellido" required></div>
+                        </div>
+                        <div class="form-field-group">
+                            <div class="form-row label-row"><label for="tarjeta">Número de Tarjeta <span class="required">*</span></label></div>
+                            <div class="form-row"><input type="text" id="tarjeta" name="tarjeta" required placeholder="0000-0000-0000-0000"></div>
+                        </div>
+                        <div class="form-field-group">
+                            <div class="form-row label-row"><label for="vencimiento">Vencimiento (MM/AA) <span class="required">*</span></label><label for="cvv">CVV <span class="required">*</span></label></div>
+                            <div class="form-row"><input type="text" id="vencimiento" name="vencimiento" required placeholder="MM/AA"><input type="text" id="cvv" name="cvv" required placeholder="123"></div>
+                        </div>
+                        <div class="checkbox-group"><input type="checkbox" id="checkalma" name="alma" required value="si"><label for="alma" class="checkbox-label">¿Acepta que su alma sea consumida? <span class="required">*</span></label></div>
+                        <button type="submit" class="submit-btn" id="enviar-alma">FIRMAR PACTO</button>
+                    </div>
+                </form>
+                <p class="footer">Al firmar, acepta perder todos los derechos sobre su alma.</p>
             </div>
-            
-            <button type="submit" class="submit-btn" id="enviar-alma">FIRMAR PACTO</button>
-        </div>
-    </form>
-            <p class="footer">Al firmar, acepta perder todos los derechos sobre su alma.</p>
+
+            <!-- Contenedor para la animación del ritual -->
+            <div id="ritual-container" class="ritual-hidden">
+                <svg id="pentagram-svg" viewBox="0 0 100 100">
+                    <path d="M50 10 L61.8 38.2 L95.1 42.4 L72.5 64.5 L78.4 97 L50 82 L21.6 97 L27.5 64.5 L4.9 42.4 L38.2 38.2 Z" />
+                </svg>
+                <p class="ritual-text">Sellando el pacto...</p>
+            </div>
+
+            <!-- Contenedor para el mensaje de éxito (inicialmente oculto) -->
+            <div id="success-message" class="ritual-hidden">
+                <p class="success-text">El pacto ha sido sellado.<br>Tu alma ahora nos pertenece.</p>
+            </div>
+
         </div>
     </section>
 
@@ -96,18 +83,15 @@
             <h1>Conozca el destino de su Alma</h1>
             <table id="lista-infernal">
                 <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Tarjeta</th>
-                        <th>Alma consumida en:</th>
-                    </tr>
+                    <tr><th>Nombre</th><th>Apellido</th><th>Tarjeta</th><th>Alma consumida en:</th></tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
     </section>
 
+    <!--  Script para la librería de partículas -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
