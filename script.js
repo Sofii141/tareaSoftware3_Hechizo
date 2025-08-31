@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animatedElements.forEach(el => observer.observe(el));
 
     // --- Añadir hechizo por defecto ---
-    agregarHechizo("Pacto Infernal");
+    agregarHechizo("Sacrificio de Alma Sangrienta");
 
     // --- Lógica para el boton de enviar ---
     const botonPacto = document.getElementById('enviar-alma');
@@ -39,7 +39,7 @@ function agregarHechizo(texto) {
     li.className = 'hechizo';
     li.innerHTML = `<span>${texto}</span><div class="acciones"><button class="btn-accion aprender">Aprender</button><button class="btn-accion eliminar">Eliminar</button></div>`;
     const aprenderBtn = li.querySelector('.aprender');
-    if (texto === "Pacto Infernal") {
+    if (texto === "Sacrificio de Alma Sangrienta") {
         aprenderBtn.addEventListener('click', () => { document.getElementById('seccion-pacto')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
     } else {
         aprenderBtn.addEventListener('click', function() { li.classList.toggle('aprendido'); this.textContent = li.classList.contains('aprendido') ? 'Desaprender' : 'Aprender'; });
@@ -139,3 +139,4 @@ document.getElementById('enviar-alma').addEventListener('click', function(event)
         alert('Debe aceptar que su alma sea consumida para fines maquiavélicos.');
     }
 });
+
