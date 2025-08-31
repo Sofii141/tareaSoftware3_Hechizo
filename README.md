@@ -5,8 +5,8 @@ Este proyecto es una aplicación web interactiva que simula un grimorio de hechi
 ## ✍️ Autores
 
 -   Ana Sofía Arango Yanza
--   Juan David Morán Santuisty
 -   Karold Dirley Delgado Arciniegas
+-   Juan David Morán Santuisty
   
 ## ✨ Características Principales
 
